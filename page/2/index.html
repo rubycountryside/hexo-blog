@@ -51,9 +51,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://RubyCountryside.win"></form>
@@ -63,6 +63,169 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-Centos-6-6-两种方式安装NodeJS" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/01/09/Centos-6-6-两种方式安装NodeJS/" class="article-date">
+  <time datetime="2017-01-08T16:20:26.000Z" itemprop="datePublished">2017-01-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/01/09/Centos-6-6-两种方式安装NodeJS/">Centos 6.6 两种方式安装NodeJS</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Linux操作系统中最常见的软件安装方式有两种，源码编译安装和软件管理器安装。由于源码编译安装耗时较大，软件依赖导致安装的重重困难。因此，笔者在这里重点描述如何用软件管理器去安装NodeJS。</p>
+<h2 id="源码安装"><a href="#源码安装" class="headerlink" title="源码安装"></a>源码安装</h2><ol>
+<li><p>安装所依赖的c++编译库。(由于库的编译时间较长，需耐心等待)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ yum install gcc-c++ openssl-devel</div></pre></td></tr></table></figure>
+</li>
+<li><p>下载nodeJS安装包</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ <span class="built_in">cd</span> /usr/<span class="built_in">local</span>/src  </div><div class="line">$ wget http://nodejs.org/dist/node-latest.tar.gz</div></pre></td></tr></table></figure>
+</li>
+<li><p>解压</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tar zxvf node-latest.tar.gz</div></pre></td></tr></table></figure>
+</li>
+<li><p>进行编译安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ ./configure  </div><div class="line">$ make</div><div class="line">$ make install</div><div class="line">$ npm install restify</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="rpm-yum安装"><a href="#rpm-yum安装" class="headerlink" title="rpm, yum安装"></a>rpm, yum安装</h2><ol>
+<li><p>添加epel源 </p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 查看机器位数</span></div><div class="line">$ file /sbin/init</div><div class="line"><span class="comment">#或者</span></div><div class="line">$ file /bin/ls</div><div class="line"><span class="comment"># 选择对应源</span></div><div class="line">$ rpm -ivh http://download.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm <span class="comment">#64bit</span></div><div class="line">$ rpm -ivh http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm <span class="comment">#32bit</span></div><div class="line">$ sudo yum upgrade ca-certificates --disablerepo=epel <span class="comment">#升级源</span></div><div class="line">```</div></pre></td></tr></table></figure>
+</li>
+<li><p>导入key: </p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6</div></pre></td></tr></table></figure>
+</li>
+<li><p>添加remi源</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ rpm -ivh http://rpms.famillecollet.com/enterprise/remi-release-6.rpm</div><div class="line">$ rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-remi</div><div class="line">```</div></pre></td></tr></table></figure>
+</li>
+<li><p>下载脚本</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ curl --silent --location https://rpm.nodesource.com/setup_5.x | bash -</div></pre></td></tr></table></figure>
+</li>
+<li><p>yum 安装gcc-c++</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ yum install gcc-c++ openssl-devel</div></pre></td></tr></table></figure>
+</li>
+<li><p>执行安装：</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ yum -y install nodejs</div></pre></td></tr></table></figure></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://RubyCountryside.win/2017/01/09/Centos-6-6-两种方式安装NodeJS/" data-id="cixswdjp100054gkxxk9487g7" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-域名中的记录类型以及区别" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/01/09/域名中的记录类型以及区别/" class="article-date">
+  <time datetime="2017-01-08T16:05:13.000Z" itemprop="datePublished">2017-01-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/01/09/域名中的记录类型以及区别/">域名中的记录类型以及区别</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-A记录"><a href="#1-A记录" class="headerlink" title="1. A记录"></a>1. A记录</h2><h5 id="定义：又称IP指向，用户可以在此设置子域名并指向到自己的目标主机地址上，从而实现通过域名找到服务器。"><a href="#定义：又称IP指向，用户可以在此设置子域名并指向到自己的目标主机地址上，从而实现通过域名找到服务器。" class="headerlink" title="定义：又称IP指向，用户可以在此设置子域名并指向到自己的目标主机地址上，从而实现通过域名找到服务器。"></a>定义：又称IP指向，用户可以在此设置子域名并指向到自己的目标主机地址上，从而实现通过域名找到服务器。</h5><h5 id="说明：指向的目标主机地址类型只能使用IP地址；"><a href="#说明：指向的目标主机地址类型只能使用IP地址；" class="headerlink" title="说明：指向的目标主机地址类型只能使用IP地址；"></a>说明：指向的目标主机地址类型只能使用IP地址；</h5><h2 id="2-CNAME"><a href="#2-CNAME" class="headerlink" title="2. CNAME"></a>2. CNAME</h2><h5 id="定义：通常称别名指向。可以为一个主机设置别名。比如设置test-mydomain-com，用来指向一个主机www-rddns-com那么以后就可以用test-mydomain-com来代替访问www-rddns-com了。"><a href="#定义：通常称别名指向。可以为一个主机设置别名。比如设置test-mydomain-com，用来指向一个主机www-rddns-com那么以后就可以用test-mydomain-com来代替访问www-rddns-com了。" class="headerlink" title="定义：通常称别名指向。可以为一个主机设置别名。比如设置test.mydomain.com，用来指向一个主机www.rddns.com那么以后就可以用test.mydomain.com来代替访问www.rddns.com了。"></a>定义：通常称别名指向。可以为一个主机设置别名。比如设置test.mydomain.com，用来指向一个主机www.rddns.com那么以后就可以用test.mydomain.com来代替访问www.rddns.com了。</h5><h5 id="说明：CNAME的目标主机地址只能使用主机名，不能使用IP地址；主机名前不能有任何其他前缀。"><a href="#说明：CNAME的目标主机地址只能使用主机名，不能使用IP地址；主机名前不能有任何其他前缀。" class="headerlink" title="说明：CNAME的目标主机地址只能使用主机名，不能使用IP地址；主机名前不能有任何其他前缀。"></a>说明：CNAME的目标主机地址只能使用主机名，不能使用IP地址；主机名前不能有任何其他前缀。</h5><p>例如：http: //等是不被允许的；·A记录优先于CNAME记录。即如果一个主机地址同时存在A记录和CNAME记录，则CNAME记录不生效。</p>
+<h2 id="3-MX记录"><a href="#3-MX记录" class="headerlink" title="3. MX记录"></a>3. MX记录</h2><h5 id="定义：邮件交换记录。用于将以该域名为结尾的电子邮件指向对应的邮件服务器以进行处理。如：用户所用的邮件是以域名mydomain-com为结尾的，则需要在管理界面中添加该域名的MX记录来处理所有以-mydomain-com结尾的邮件。"><a href="#定义：邮件交换记录。用于将以该域名为结尾的电子邮件指向对应的邮件服务器以进行处理。如：用户所用的邮件是以域名mydomain-com为结尾的，则需要在管理界面中添加该域名的MX记录来处理所有以-mydomain-com结尾的邮件。" class="headerlink" title="定义：邮件交换记录。用于将以该域名为结尾的电子邮件指向对应的邮件服务器以进行处理。如：用户所用的邮件是以域名mydomain.com为结尾的，则需要在管理界面中添加该域名的MX记录来处理所有以@mydomain.com结尾的邮件。"></a>定义：邮件交换记录。用于将以该域名为结尾的电子邮件指向对应的邮件服务器以进行处理。如：用户所用的邮件是以域名mydomain.com为结尾的，则需要在管理界面中添加该域名的MX记录来处理所有以@mydomain.com结尾的邮件。</h5><h5 id="说明：MX记录可以使用主机名或IP地址；·MX记录可以通过设置优先级实现主辅服务器设置，“优先级”中的数字越小表示级别越高。也可以使用相同优先级达到负载均衡的目的；·如果在“主机名”中填入子域名则此MX记录只对该子域名生效。"><a href="#说明：MX记录可以使用主机名或IP地址；·MX记录可以通过设置优先级实现主辅服务器设置，“优先级”中的数字越小表示级别越高。也可以使用相同优先级达到负载均衡的目的；·如果在“主机名”中填入子域名则此MX记录只对该子域名生效。" class="headerlink" title="说明：MX记录可以使用主机名或IP地址；·MX记录可以通过设置优先级实现主辅服务器设置，“优先级”中的数字越小表示级别越高。也可以使用相同优先级达到负载均衡的目的；·如果在“主机名”中填入子域名则此MX记录只对该子域名生效。"></a>说明：MX记录可以使用主机名或IP地址；·MX记录可以通过设置优先级实现主辅服务器设置，“优先级”中的数字越小表示级别越高。也可以使用相同优先级达到负载均衡的目的；·如果在“主机名”中填入子域名则此MX记录只对该子域名生效。</h5><h2 id="4-NS记录"><a href="#4-NS记录" class="headerlink" title="4. NS记录"></a>4. NS记录</h2><h5 id="定义：解析服务器记录。用来表明由哪台服务器对该域名进行解析。这里的NS记录只对子域名生效。"><a href="#定义：解析服务器记录。用来表明由哪台服务器对该域名进行解析。这里的NS记录只对子域名生效。" class="headerlink" title="定义：解析服务器记录。用来表明由哪台服务器对该域名进行解析。这里的NS记录只对子域名生效。"></a>定义：解析服务器记录。用来表明由哪台服务器对该域名进行解析。这里的NS记录只对子域名生效。</h5><p>   例如用户希望由12.34.56.78这台服务器解析news.mydomain.com，则需要设置news.mydomain.com的NS记录。 </p>
+<h5 id="说明：“优先级”中的数字越小表示级别越高；·“IP地址-主机名”中既可以填写IP地址，也可以填写像ns-mydomain-com这样的主机地址，但必须保证该主机地址有效。"><a href="#说明：“优先级”中的数字越小表示级别越高；·“IP地址-主机名”中既可以填写IP地址，也可以填写像ns-mydomain-com这样的主机地址，但必须保证该主机地址有效。" class="headerlink" title="说明：“优先级”中的数字越小表示级别越高；·“IP地址/主机名”中既可以填写IP地址，也可以填写像ns.mydomain.com这样的主机地址，但必须保证该主机地址有效。"></a>说明：“优先级”中的数字越小表示级别越高；·“IP地址/主机名”中既可以填写IP地址，也可以填写像ns.mydomain.com这样的主机地址，但必须保证该主机地址有效。</h5><p>   例如，将news.mydomain.com的NS记录指向到ns.mydomain.com，在设置NS记录的同时还需要设置ns.mydomain.com的指向，<br>   否则NS记录将无法正常解析；·NS记录优先于A记录。即，如果一个主机地址同时存在NS记录和A记录，则A记录不生效。这里的NS记录只对子域名生效。</p>
+<h2 id="域名解析"><a href="#域名解析" class="headerlink" title="域名解析"></a>域名解析</h2><p>在A记录里面，主机名为 * 的解析称为泛解析，就是除了主机名为空的主域名以外，所有二级域名都可以解析生效，而唯独主域名不能生效，加@恰好就是解析主机名为空的主域名解析，做了这两条解析以后，主域名本身以及所有的二级域名全不能解析生效。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://RubyCountryside.win/2017/01/09/域名中的记录类型以及区别/" data-id="cixswdjoz00044gkxhr7hp7h2" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-npm-install本地安装与全局安装" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/01/08/npm-install本地安装与全局安装/" class="article-date">
+  <time datetime="2017-01-08T14:51:16.000Z" itemprop="datePublished">2017-01-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/01/08/npm-install本地安装与全局安装/">npm install本地安装与全局安装</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>npm的包安装分为本地安装（local）、全局安装（global）两种。</p>
+<h2 id="本地安装"><a href="#本地安装" class="headerlink" title="本地安装"></a>本地安装</h2><ol>
+<li>将安装包放在 ./node_modules 下（运行npm时所在的目录）</li>
+<li>可以通过 require() 来引入本地安装的包<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install grunt --save-dev</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>这条命令在当前目录下发现一个node_modules目录，目录包含grunt这个包。</p>
+<h3 id="全局安装"><a href="#全局安装" class="headerlink" title="全局安装"></a>全局安装</h3><ol>
+<li><p>将安装包放在 /usr/local/lib/node_modules/</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install -g grunt-cli <span class="comment">#运行后在/usr/local/bin可发现grunt-cli</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>可以直接在命令行里使用，其原理是通过在`/usr/local/bin下创建软链接的方式实现。 </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 我们在项目根目录下创建test.js并</span></div><div class="line"><span class="keyword">var</span> grunt = <span class="built_in">require</span>(<span class="string">'grunt'</span>);</div><div class="line">grunt.log.writeln(<span class="string">'hello grunt'</span>);</div></pre></td></tr></table></figure>
+</li>
+<li><p>运行test.js</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ node test.js <span class="comment">#然后就会看到如下输出</span></div><div class="line">hello grunt</div></pre></td></tr></table></figure></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://RubyCountryside.win/2017/01/08/npm-install本地安装与全局安装/" data-id="cixswdjoi00004gkx8yhodpfi" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -99,7 +262,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://RubyCountryside.win/2017/01/08/hello-world/" data-id="cixozvfc00002n8kxpmtd1nnw" class="article-share-link">Share</a>
+      <a data-url="http://RubyCountryside.win/2017/01/08/hello-world/" data-id="cixswdjoq00014gkxhj2tlsow" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -138,9 +301,21 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/01/11/图片画廊/">图片画廊</a>
+          </li>
+        
+          <li>
+            <a href="/2017/01/11/函数中/">函数（中）</a>
+          </li>
+        
+          <li>
+            <a href="/2017/01/10/函数下/">函数（下）</a>
+          </li>
         
           <li>
             <a href="/2017/01/09/Linux软件安装包类型/">Linux软件安装包类型</a>
@@ -148,18 +323,6 @@
         
           <li>
             <a href="/2017/01/09/软件安装包的命名方式/">软件安装包的命名方式</a>
-          </li>
-        
-          <li>
-            <a href="/2017/01/09/Centos-6-6-两种方式安装NodeJS/">Centos 6.6 两种方式安装NodeJS</a>
-          </li>
-        
-          <li>
-            <a href="/2017/01/09/域名中的记录类型以及区别/">域名中的记录类型以及区别</a>
-          </li>
-        
-          <li>
-            <a href="/2017/01/08/npm-install本地安装与全局安装/">npm install本地安装与全局安装</a>
           </li>
         
       </ul>
@@ -175,7 +338,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 Yu Jing<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
@@ -189,7 +352,7 @@
 </nav>
     
 
-<script src="/js/jquery-3.1.1.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
 
   <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">

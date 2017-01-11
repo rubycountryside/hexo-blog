@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>函数（中） | RubyCountryside</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="（3）callee属性
+arguments对象带有一个callee属性，返回它所对应的原函数。12345var f = function(one) &amp;#123;  console.log(arguments.callee === f);&amp;#125;f() // true
+可以通过arguments.callee，达到调用函数自身的目的。这个属性在严格模式里面是禁用的，因此不建议使用。
+函数的其他知">
+<meta property="og:type" content="article">
+<meta property="og:title" content="函数（中）">
+<meta property="og:url" content="http://RubyCountryside.win/2017/01/11/函数中/index.html">
+<meta property="og:site_name" content="RubyCountryside">
+<meta property="og:description" content="（3）callee属性
+arguments对象带有一个callee属性，返回它所对应的原函数。12345var f = function(one) &amp;#123;  console.log(arguments.callee === f);&amp;#125;f() // true
+可以通过arguments.callee，达到调用函数自身的目的。这个属性在严格模式里面是禁用的，因此不建议使用。
+函数的其他知">
+<meta property="og:updated_time" content="2017-01-10T16:29:02.810Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="函数（中）">
+<meta name="twitter:description" content="（3）callee属性
+arguments对象带有一个callee属性，返回它所对应的原函数。12345var f = function(one) &amp;#123;  console.log(arguments.callee === f);&amp;#125;f() // true
+可以通过arguments.callee，达到调用函数自身的目的。这个属性在严格模式里面是禁用的，因此不建议使用。
+函数的其他知">
+  
+    <link rel="alternate" href="/atom.xml" title="RubyCountryside" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">RubyCountryside</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://RubyCountryside.win"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-函数中" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/01/11/函数中/" class="article-date">
+  <time datetime="2017-01-10T16:24:32.000Z" itemprop="datePublished">2017-01-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      函数（中）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>（3）callee属性</p>
+<p>arguments对象带有一个callee属性，返回它所对应的原函数。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var f = <span class="keyword">function</span>(one) &#123;</div><div class="line">  console.log(arguments.callee === f);</div><div class="line">&#125;</div><div class="line"></div><div class="line">f() // <span class="literal">true</span></div></pre></td></tr></table></figure></p>
+<p>可以通过arguments.callee，达到调用函数自身的目的。这个属性在严格模式里面是禁用的，因此不建议使用。</p>
+<p>函数的其他知识点<br>闭包</p>
+<p>闭包（closure）是Javascript语言的一个难点，也是它的特色，很多高级应用都要依靠闭包实现。</p>
+<p>要理解闭包，首先必须理解变量作用域。前面提到，JavaScript有两种作用域：全局作用域和函数作用域。函数内部可以直接读取全局变量。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var n = 999;</div><div class="line"></div><div class="line"><span class="keyword">function</span> <span class="function"><span class="title">f1</span></span>() &#123;</div><div class="line">  console.log(n);</div><div class="line">&#125;</div><div class="line">f1() // 999</div></pre></td></tr></table></figure></p>
+<p>上面代码中，函数f1可以读取全局变量n。</p>
+<p>但是，在函数外部无法读取函数内部声明的变量。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">function</span> <span class="function"><span class="title">f1</span></span>() &#123;</div><div class="line">  var n = 999;</div><div class="line">&#125;</div><div class="line"></div><div class="line">console.log(n)</div><div class="line">// Uncaught ReferenceError: n is not defined</div></pre></td></tr></table></figure></p>
+<p>上面代码中，函数f1内部声明的变量n，函数外是无法读取的。</p>
+<p>如果出于种种原因，需要得到函数内的局部变量。正常情况下，这是办不到的，只有通过变通方法才能实现。那就是在函数的内部，再定义一个函数。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">function</span> <span class="function"><span class="title">f1</span></span>() &#123;</div><div class="line">  var n = 999;</div><div class="line">  <span class="keyword">function</span> <span class="function"><span class="title">f2</span></span>() &#123;</div><div class="line">　　console.log(n); // 999</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>上面代码中，函数f2就在函数f1内部，这时f1内部的所有局部变量，对f2都是可见的。但是反过来就不行，f2内部的局部变量，对f1就是不可见的。这就是JavaScript语言特有的”链式作用域”结构（chain scope），子对象会一级一级地向上寻找所有父对象的变量。所以，父对象的所有变量，对子对象都是可见的，反之则不成立。</p>
+<p>既然f2可以读取f1的局部变量，那么只要把f2作为返回值，我们不就可以在f1外部读取它的内部变量了吗！<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">function</span> <span class="function"><span class="title">f1</span></span>() &#123;</div><div class="line">  var n = 999;</div><div class="line">  <span class="keyword">function</span> <span class="function"><span class="title">f2</span></span>() &#123;</div><div class="line">    console.log(n);</div><div class="line">  &#125;</div><div class="line">  <span class="built_in">return</span> f2;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var result = f1();</div><div class="line">result(); // 999</div></pre></td></tr></table></figure></p>
+<p>上面代码中，函数f1的返回值就是函数f2，由于f2可以读取f1的内部变量，所以就可以在外部获得f1的内部变量了。</p>
+<p>闭包就是函数f2，即能够读取其他函数内部变量的函数。由于在JavaScript语言中，只有函数内部的子函数才能读取内部变量，因此可以把闭包简单理解成“定义在一个函数内部的函数”。闭包最大的特点，就是它可以“记住”诞生的环境，比如f2记住了它诞生的环境f1，所以从f2可以得到f1的内部变量。在本质上，闭包就是将函数内部和函数外部连接起来的一座桥梁。</p>
+<p>闭包的最大用处有两个，一个是可以读取函数内部的变量，另一个就是让这些变量始终保持在内存中，即闭包可以使得它诞生环境一直存在。请看下面的例子，闭包使得内部变量记住上一次调用时的运算结果。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">function</span> createIncrementor(start) &#123;</div><div class="line">  <span class="built_in">return</span> <span class="function"><span class="title">function</span></span> () &#123;</div><div class="line">    <span class="built_in">return</span> start++;</div><div class="line">  &#125;;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var inc = createIncrementor(5);</div><div class="line"></div><div class="line">inc() // 5</div><div class="line">inc() // 6</div><div class="line">inc() // 7</div></pre></td></tr></table></figure></p>
+<p>上面代码中，start是函数createIncrementor的内部变量。通过闭包，start的状态被保留了，每一次调用都是在上一次调用的基础上进行计算。从中可以看到，闭包inc使得函数createIncrementor的内部环境，一直存在。所以，闭包可以看作是函数内部作用域的一个接口。</p>
+<p>为什么会这样呢？原因就在于inc始终在内存中，而inc的存在依赖于createIncrementor，因此也始终在内存中，不会在调用结束后，被垃圾回收机制回收。</p>
+<p>闭包的另一个用处，是封装对象的私有属性和私有方法。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">function</span> Person(name) &#123;</div><div class="line">  var _age;</div><div class="line">  <span class="keyword">function</span> <span class="built_in">set</span>Age(n) &#123;</div><div class="line">    _age = n;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">function</span> <span class="function"><span class="title">getAge</span></span>() &#123;</div><div class="line">    <span class="built_in">return</span> _age;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="built_in">return</span> &#123;</div><div class="line">    name: name,</div><div class="line">    getAge: getAge,</div><div class="line">    <span class="built_in">set</span>Age: <span class="built_in">set</span>Age</div><div class="line">  &#125;;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var p1 = Person(<span class="string">'张三'</span>);</div><div class="line">p1.setAge(25);</div><div class="line">p1.getAge() // 25</div></pre></td></tr></table></figure></p>
+<p>上面代码中，函数Person的内部变量_age，通过闭包getAge和setAge，变成了返回对象p1的私有变量。</p>
+<p>注意，外层函数每次运行，都会生成一个新的闭包，而这个闭包又会保留外层函数的内部变量，所以内存消耗很大。因此不能滥用闭包，否则会造成网页的性能问题。</p>
+<p>立即调用的函数表达式（IIFE）</p>
+<p>在Javascript中，一对圆括号()是一种运算符，跟在函数名之后，表示调用该函数。比如，print()就表示调用print函数。</p>
+<p>有时，我们需要在定义函数之后，立即调用该函数。这时，你不能在函数的定义之后加上圆括号，这会产生语法错误。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="title">function</span></span>()&#123; /* code */ &#125;();</div><div class="line">// SyntaxError: Unexpected token (</div><div class="line">产生这个错误的原因是，<span class="keyword">function</span>这个关键字即可以当作语句，也可以当作表达式。</div><div class="line"></div><div class="line">// 语句</div><div class="line"><span class="keyword">function</span> <span class="function"><span class="title">f</span></span>() &#123;&#125;</div><div class="line"></div><div class="line">// 表达式</div><div class="line">var f = <span class="keyword">function</span> <span class="function"><span class="title">f</span></span>() &#123;&#125;</div><div class="line">为了避免解析上的歧义，JavaScript引擎规定，如果<span class="keyword">function</span>关键字出现在行首，一律解释成语句。因此，JavaScript引擎看到行首是<span class="keyword">function</span>关键字之后，认为这一段都是函数的定义，不应该以圆括号结尾，所以就报错了。</div><div class="line"></div><div class="line">解决方法就是不要让<span class="keyword">function</span>出现在行首，让引擎将其理解成一个表达式。最简单的处理，就是将其放在一个圆括号里面。</div></pre></td></tr></table></figure></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">(<span class="function"><span class="title">function</span></span>()&#123; /* code */ &#125;());</div><div class="line">// 或者</div><div class="line">(<span class="function"><span class="title">function</span></span>()&#123; /* code */ &#125;)();</div></pre></td></tr></table></figure>
+<p>上面两种写法都是以圆括号开头，引擎就会认为后面跟的是一个表示式，而不是函数定义语句，所以就避免了错误。这就叫做“立即调用的函数表达式”（Immediately-Invoked Function Expression），简称IIFE。</p>
+<p>注意，上面两种写法最后的分号都是必须的。如果省略分号，遇到连着两个IIFE，可能就会报错。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">// 报错</div><div class="line">(<span class="function"><span class="title">function</span></span>()&#123; /* code */ &#125;())</div><div class="line">(<span class="function"><span class="title">function</span></span>()&#123; /* code */ &#125;())</div></pre></td></tr></table></figure></p>
+<p>上面代码的两行之间没有分号，JavaScript会将它们连在一起解释，将第二行解释为第一行的参数。</p>
+<p>推而广之，任何让解释器以表达式来处理函数定义的方法，都能产生同样的效果，比如下面三种写法。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">var i = <span class="function"><span class="title">function</span></span>()&#123; <span class="built_in">return</span> 10; &#125;();</div><div class="line"><span class="literal">true</span> &amp;&amp; <span class="function"><span class="title">function</span></span>()&#123; /* code */ &#125;();</div><div class="line">0, <span class="function"><span class="title">function</span></span>()&#123; /* code */ &#125;();</div><div class="line">甚至像下面这样写，也是可以的。</div><div class="line"></div><div class="line">!<span class="function"><span class="title">function</span></span>()&#123; /* code */ &#125;();</div><div class="line">~<span class="function"><span class="title">function</span></span>()&#123; /* code */ &#125;();</div><div class="line">-<span class="function"><span class="title">function</span></span>()&#123; /* code */ &#125;();</div><div class="line">+<span class="function"><span class="title">function</span></span>()&#123; /* code */ &#125;();</div><div class="line">new关键字也能达到这个效果。</div><div class="line"></div><div class="line">new <span class="function"><span class="title">function</span></span>()&#123; /* code */ &#125;</div><div class="line"></div><div class="line">new <span class="function"><span class="title">function</span></span>()&#123; /* code */ &#125;()</div></pre></td></tr></table></figure></p>
+<p>// 只有传递参数时，才需要最后那个圆括号<br>通常情况下，只对匿名函数使用这种“立即执行的函数表达式”。它的目的有两个：一是不必为函数命名，避免了污染全局变量；二是IIFE内部形成了一个单独的作用域，可以封装一些外部无法读取的私有变量。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">// 写法一</div><div class="line">var tmp = newData;</div><div class="line">processData(tmp);</div><div class="line">storeData(tmp);</div><div class="line"></div><div class="line">// 写法二</div><div class="line">(<span class="function"><span class="title">function</span></span> ()&#123;</div><div class="line">  var tmp = newData;</div><div class="line">  processData(tmp);</div><div class="line">  storeData(tmp);</div><div class="line">&#125;());</div></pre></td></tr></table></figure></p>
+<p>上面代码中，写法二比写法一更好，因为完全避免了污染全局变量。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://RubyCountryside.win/2017/01/11/函数中/" data-id="cixswdjpu00074gkxrmnjksrg" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/01/11/图片画廊/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Récent</strong>
+      <div class="article-nav-title">
+        
+          图片画廊
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/01/10/函数下/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">函数（下）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Articles récents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/01/11/图片画廊/">图片画廊</a>
+          </li>
+        
+          <li>
+            <a href="/2017/01/11/函数中/">函数（中）</a>
+          </li>
+        
+          <li>
+            <a href="/2017/01/10/函数下/">函数（下）</a>
+          </li>
+        
+          <li>
+            <a href="/2017/01/09/Linux软件安装包类型/">Linux软件安装包类型</a>
+          </li>
+        
+          <li>
+            <a href="/2017/01/09/软件安装包的命名方式/">软件安装包的命名方式</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Yu Jing<br>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
